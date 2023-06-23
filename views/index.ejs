@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1><%= message %></h1>
+    <!-- <script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+
+  // Emit events
+  socket.emit('chat message', 'Hello, Server!');
+
+  // Handle events
+  socket.on('chat message', (message) => {
+    console.log('Received message:', message);
+  });
+</script> -->
+<script>
+  const socket = new WebSocket('ws://localhost:3000');
+
+  // Handle connection open
+  socket.onopen = () => {
+    console.log('Connected to server');
+    // Send a message to the server
+    socket.send('Hello, Server!');
+  };
+
+  // Handle messages
+  socket.onmessage = (event) => {
+    console.log('Received message:', event.data);
+  };
+
+  // Handle disconnection
+  socket.onclose = () => {
+    console.log('Disconnected from server');
+  };
+</script>
+
+  </body>
+</html>
+
+
